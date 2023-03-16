@@ -18,7 +18,7 @@ def jogo(palavra_secreta):
 
     while jogo_acabou == False:
 
-        #print("Palavra secreta:", " ".join(resultado))
+        print("Palavra secreta:", " ".join(resultado))
 
         letra_chute = input("Qual o seu palpite: ").upper()
 
