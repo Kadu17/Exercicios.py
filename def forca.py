@@ -1,13 +1,19 @@
 import random
+import pandas as pd
+import requests
+
 
 def retornar_palvras():
-    listaPalavras = ['CACHORRO', 'MACACO', 'GATO', 'GORILA', 'VACA', 'TIGRE' ]
+    listaPalavras = [['CACHORRO', 'É um animal de estimação'], ['MACACO', 'A fruta preferida dele é banana'],['GATO', 'É um felino'],['ELEFANTE', 'É um animal conhecido por ter medo de ratos' ],['VACA','Muuuh'],['LEAO','É considerado o rei da selva']]
 
-    palavraSecretas = list(random.choice(listaPalavras))
-    return palavraSecretas
+    palavraSecreta = list(random.choice(listaPalavras))
+    palavra = palavraSecreta[0]
+    dica = palavraSecreta[1]
+    return palavra, dica
 
 
-def jogo(palavra_secreta):
+
+def jogo(palavra_secreta, dica):
     jogo_acabou = False
     erros = 0
 
@@ -22,27 +28,32 @@ def jogo(palavra_secreta):
 
         letra_chute = input("Qual o seu palpite: ").upper()
 
-        if letra_chute in palavra_secreta:
-            for posicao_da_letra in range(0, len(palavra_secreta)):
-
-                if palavra_secreta[posicao_da_letra] == letra_chute:
-                    resultado[posicao_da_letra] = letra_chute
-
-            print(" ".join(resultado).upper())
+        if letra_chute == 'DICA':
+            print(dica)
         else:
-            print("Tente novamente! ")
-            erros += 1
+            if letra_chute in palavra_secreta:
+                for posicao_da_letra in range(0, len(palavra_secreta)):
+
+                    if palavra_secreta[posicao_da_letra] == letra_chute:
+                        resultado[posicao_da_letra] = letra_chute
+
+                print(" ".join(resultado).upper())
+            else:
+                print("Tente novamente! ")
+                erros += 1
 
         if "_" not in resultado:
             print("Você ganhou!")
             jogo_acabou = True
 
 
-        if erros == 3:
+        if erros == 10:
             print("Você perdeu!")
             jogo_acabou = True
 
 
 
-palavra = retornar_palvras()
-jogo(palavra)
+
+
+palavra, dica = retornar_palvras()
+jogo(palavra, dica)
