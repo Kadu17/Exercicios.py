@@ -51,6 +51,15 @@ def jogo(palavra_secreta, dica):
             print("Você perdeu!")
             jogo_acabou = True
 
+def extrair_informaçoes():
+    inf = requests.get(palavra, dica)
+    print(inf)
+
+    listaInf = {"Palavras": palavra, "Preço": dica}
+    plan = pd.DataFrame(listaInf)
+
+    plan.to_excel("py.teste.xlsx")
+
 
 
 
