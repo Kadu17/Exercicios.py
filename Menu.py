@@ -37,6 +37,7 @@ def menu():
                 else:
                     print('Plano inválido')
             while True:
+                print('Tipos: | user | admin')
                 tipo = input('Tipo: ')
                 if tipo in tipos:
                     usuario.append(tipo)
