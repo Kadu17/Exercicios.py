@@ -1,12 +1,14 @@
 from netflix import Cliente
+from Create import Create_user
+from bdLer import Read
 
-b1 = Cliente()
 usuario = []
 usuarios = []
 escolhido = ['Kadu', '', '', 'user']
 planos = ['basic', 'medium', 'premium']
 tipos = ['admin', 'user']
 
+read = Read()
 def menu():
     while True:
         print('---------------------\n'
@@ -24,43 +26,44 @@ def menu():
 
         elif op == 1:
             usuario.clear()
-            nome = input('Nome: ')
-            usuario.append(nome)
-            email = input('Email: ')
-            usuario.append(email)
-            print('Planos: | basic | medium | premium |')
-            while True:
-                plano = input('Plano: ')
-                if plano in planos:
-                    usuario.append(plano)
-                    break
-                else:
-                    print('Plano inválido')
-            while True:
-                print('Tipos: | user | admin')
-                tipo = input('Tipo: ')
-                if tipo in tipos:
-                    usuario.append(tipo)
-                    break
-                else:
-                    print('Tipo inválido')
-            usuarios.append(usuario[:])
-            usuario.clear()
-            print(usuarios)
+            Read()
         elif op == 2:
-            pass
+            Create_user()
 
-        elif op == 3:
-            cliente = input('Nome: ')
-            for i in range(len(usuarios)):
-                if cliente == usuarios[i][0]:
-                    escolhido.append(usuario[i][0])
-                    escolhido.append(usuario[i][1])
-                    escolhido.append(usuario[i][2])
-                    escolhido.append(usuario[i][3])
 
-            print(escolhido)
 
 menu()
-b1 = Cliente(escolhido[0], escolhido[1], escolhido[2], escolhido[3])
-b1.ver_filme('Rambo', 'premium')
+#             while True:
+#                 plano = input('Plano: ')
+#                 if plano in planos:
+#                     usuario.append(plano)
+#                     break
+#                 else:
+#                     print('Plano inválido')
+#             while True:
+#                 print('Tipos: | user | admin')
+#                 tipo = input('Tipo: ')
+#                 if tipo in tipos:
+#                     usuario.append(tipo)
+#                     break
+#                 else:
+#                     print('Tipo inválido')
+#             usuarios.append(usuario[:])
+#             usuario.clear()
+#             print(usuarios)
+#         elif op == 2:
+#             pass
+#
+#         elif op == 3:
+#             cliente = input('Nome: ')
+#             for i in range(len(usuarios)):
+#                 if cliente == usuarios[i][0]:
+#                     escolhido.append(usuario[i][0])
+#                     escolhido.append(usuario[i][1])
+#                     escolhido.append(usuario[i][2])
+#                     escolhido.append(usuario[i][3])
+#
+#             print(escolhido)
+#
+# menu()
+# b1 = Cliente(escolhido[0], escolhido[1], escolhido[2], escolhido[3])
