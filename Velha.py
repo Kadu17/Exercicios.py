@@ -60,6 +60,9 @@ while True:
         jogo.exibirTabuleiro()
         print("Jogador O venceu!!")
         exit()
-
+    elif jogador_vencedor == 'empate':
+        jogo.exibirTabuleiro()
+        print("Empate")
+        exit()
     jogada = jogo.exibirTabuleiro()
     jogo.verificarJogada(jogada)
