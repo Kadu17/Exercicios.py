@@ -1,69 +1,98 @@
-from netflix import Cliente
-from Create import Create_user
-from bdLer import Read
+from create import inserir_filmes, inserir_usuarios
+from read import listar_filmes, listar_usuarios, procurar_usuario
+from update import up_usuario, up_filme
+from delete import dt_usuario, dt_filme
 
-usuario = []
-usuarios = []
-escolhido = ['Kadu', '', '', 'user']
-planos = ['basic', 'medium', 'premium']
-tipos = ['admin', 'user']
-
-read = Read()
-def menu():
+def menu(user):
     while True:
-        print('---------------------\n'
-              f'Usuário: {escolhido[0]}\n'
-              f'Tipo: {escolhido[3]}\n'
+        print(f'\n\nUsuário: {user}\n'
               '[0] - Sair\n'
-              '[1] - Cadastrar Usuário\n'
-              '[2] - Cadastrar Filme\n'
-              '[3] - Login\n'
-              '[4] - Listar Filmes\n'
-              '---------------------\n')
+              '[1] - Login\n'
+              '[2] - Cadastrar\n'
+              '[3] - Listar\n'
+              '[4] - Atualizar\n'
+              '[5] - Apagar\n'
+              )
         op = int(input('Escolha a opção: '))
         if op == 0:
             break
-
         elif op == 1:
-            usuario.clear()
-            Read()
+            login()
         elif op == 2:
-            Create_user()
+            if user != '':
+                menu_cadastrar()
+            else:
+                print('É necessário Logar como admin para fazer cadastros...')
+        elif op == 3:
+            menu_listar()
+        elif op == 4:
+            menu_atualizar()
+        elif op == 5:
+            menu_apagar()
 
 
+def menu_cadastrar():
+    print('\n'
+          '[0] - Sair\n'
+          '[1] - Usuário\n'
+          '[2] - Filme\n'
+          )
+    op = int(input('Escolha a opção: '))
+    if op == 0:
+        pass
+    elif op == 1:
+        inserir_usuarios()
+    elif op == 2:
+        inserir_filmes()
 
-menu()
-#             while True:
-#                 plano = input('Plano: ')
-#                 if plano in planos:
-#                     usuario.append(plano)
-#                     break
-#                 else:
-#                     print('Plano inválido')
-#             while True:
-#                 print('Tipos: | user | admin')
-#                 tipo = input('Tipo: ')
-#                 if tipo in tipos:
-#                     usuario.append(tipo)
-#                     break
-#                 else:
-#                     print('Tipo inválido')
-#             usuarios.append(usuario[:])
-#             usuario.clear()
-#             print(usuarios)
-#         elif op == 2:
-#             pass
-#
-#         elif op == 3:
-#             cliente = input('Nome: ')
-#             for i in range(len(usuarios)):
-#                 if cliente == usuarios[i][0]:
-#                     escolhido.append(usuario[i][0])
-#                     escolhido.append(usuario[i][1])
-#                     escolhido.append(usuario[i][2])
-#                     escolhido.append(usuario[i][3])
-#
-#             print(escolhido)
-#
-# menu()
-# b1 = Cliente(escolhido[0], escolhido[1], escolhido[2], escolhido[3])
+
+def menu_listar():
+    print('\n'
+          '[0] - Sair\n'
+          '[1] - Usuário\n'
+          '[2] - Filme\n'
+          )
+    op = int(input('Escolha a opção: '))
+    if op == 0:
+        pass
+    elif op == 1:
+        listar_usuarios()
+    elif op == 2:
+        listar_filmes()
+
+
+def login():
+    usuario = input('Usuário: ')
+    email = input('Email: ')
+    procurar_usuario(usuario, email)
+    if procurar_usuario(usuario, email) == 'admin':
+        menu(usuario)
+
+
+def menu_atualizar():
+    print('\n'
+          '[0] - Sair\n'
+          '[1] - Usuário\n'
+          '[2] - Filme\n'
+          )
+    op = int(input('Escolha a opção: '))
+    if op == 0:
+        pass
+    elif op == 1:
+        up_usuario()
+    elif op == 2:
+        up_filme()
+
+def menu_apagar():
+    print('\n'
+          '[0] - Sair\n'
+          '[1] - Usuário\n'
+          '[2] - Filme\n'
+          )
+    op = int(input('Escolha a opção: '))
+    if op == 0:
+        pass
+    elif op == 1:
+        dt_usuario()
+    elif op == 2:
+        dt_filme()
