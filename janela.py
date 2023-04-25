@@ -4,6 +4,8 @@ from create import inserir_filmes, inserir_usuarios
 from read import listar_usuarios, procurar_usuario
 from update import up_usuario
 from delete import dt_usuario
+import pyautogui
+pyautogui.PAUSE = 1
 
 janela = Tk()
 
@@ -18,22 +20,23 @@ class Aplicacao():
         self.inserts()
         self.lista()
         self.select_list()
+
         janela.mainloop()
 
     def tela(self):
         self.janela.title("NETFLIX")
         self.janela.configure(background="cyan")
-        self.janela.geometry("700x500")
+        self.janela.geometry("700x800")
         self.janela.resizable(True, True)
-        self.janela.minsize(width=700, height=500)
+        self.janela.minsize(width=700, height=800)
 
     def frames(self):
         self.frame0 = Frame(self.janela, bg="black")
-        self.frame0.place(relheight=0.11, relwidth=0.94, relx=0.03, rely=0.03)
+        self.frame0.place(relheight=0.07, relwidth=0.94, relx=0.03, rely=0.03)
         self.frame1 = Frame(self.janela, bg="black")
-        self.frame1.place(relheight=0.25, relwidth=0.94, relx=0.03, rely=0.20)
+        self.frame1.place(relheight=0.20, relwidth=0.94, relx=0.03, rely=0.12)
         self.frame2 = Frame(self.janela, bg="black")
-        self.frame2.place(relheight=0.45, relwidth=0.94, relx=0.03, rely=0.50)
+        self.frame2.place(relheight=0.20, relwidth=0.94, relx=0.03, rely=0.34)
 
     def botoes(self):
         self.btBuscar = Button(self.frame0, text='Buscar', bg="cyan", command=self.select_user)
@@ -53,6 +56,21 @@ class Aplicacao():
 
         self.btDelete = Button(self.frame0, text='Delete', bg="cyan", command=self.delete_user)
         self.btDelete.place(relx=0.81, rely=0.40, relwidth=0.1, relheight=0.50)
+
+        self.btDimensao = Button(self.janela, text='Tela', bg="cyan", command=self.dimension)
+        self.btDimensao.place(relx=0.05, rely=0.50, relwidth=0.1, relheight=0.10)
+
+        self.btPosicao = Button(self.janela, text='Posicao', bg="cyan", command=self.position)
+        self.btPosicao.place(relx=0.20, rely=0.50, relwidth=0.1, relheight=0.10)
+
+        self.btMover = Button(self.janela, text='Mover', bg="cyan", command=self.move)
+        self.btMover.place(relx=0.35, rely=0.50, relwidth=0.1, relheight=0.10)
+
+        self.btAlerta = Button(self.janela, text='Alerta', bg="cyan", command=self.alert)
+        self.btAlerta.place(relx=0.50, rely=0.50, relwidth=0.1, relheight=0.10)
+
+        self.btBot = Button(self.janela, text='bot', bg="cyan", command=self.bot)
+        self.btBot.place(relx=0.65, rely=0.50, relwidth=0.1, relheight=0.10)
 
     def labels(self):
         self.lbIDUsuario = Label(self.frame0, text="ID", background="cyan")
@@ -169,3 +187,30 @@ class Aplicacao():
                        self.insertIdade.get())
             self.limpar_tela()
             self.select_list()
+
+    def dimension(self):
+        x, y = pyautogui.size()
+        print(x)
+        print(y)
+
+    def position(self):
+        w, z = pyautogui.position()
+        print(w)
+        print(z)
+
+    def move(self):
+        pyautogui.moveTo(50,50)
+
+
+    def alert(self):
+        print(pyautogui.confirm(text='Prometo fazer os exercicios', title='Feriado', buttons=['ok', 'Cancel']))
+
+    def bot(self):
+        pyautogui.press('win')
+        pyautogui.write('bloco')
+        pyautogui.press('enter')
+        pyautogui.write('Aula de PyautoGui' )
+        pyautogui.hotkey('crtl', 's')
+        pyautogui.write('Rascunho')
+        pyautogui.hotkey('alt', 'l')
+        pyautogui.hotkey('win', 'd')
