@@ -4,15 +4,15 @@ import os
 
 @staticmethod
 def cria_planilha():
-    d = {"POSIÇÃO": [''], "Nome": [''], "Pontos": ['']}
+    d = {"Nome": [''], "Pontos": ['']}
     dados = pd.DataFrame(data=d)
     dados.to_excel("teste.xlsx", index=False)
 
 @staticmethod
 def ranking():
     planilha = pd.read_excel("teste.xlsx")
-    r = planilha.loc[:,['Nome','Pontos']]
-    rank = r.sort_values(by=['Pontos'],ascending=False, na_position='last',ignore_index=True).head(5)
+    r = planilha.loc[:, ['Nome', 'Pontos']]
+    rank = r.sort_values(by=['Pontos'],ascending=False, na_position='last', ignore_index=True).head(5)
     print(rank)
 
 
@@ -40,17 +40,14 @@ class Jogo:
     def palpite(self,palavra_certa,dicas):
         if self.__cont == 0:
             self.__cont += 1
-            print(f"A primeira dica é: {dicas[0]}")
+            print(f"A primeira dica é: {dicas[0]}\n")
 
-        palpite = input("Digite o seu palpite: ").upper()
+        palpite = input("Digite o seu palpite: \n").upper()
         if palpite == palavra_certa:
-            print("Parabéns,você acertou!")
-            print(f"{n} fez {self.__pontos} pontos ")
-            continua = input("Você quer continuar jogando? Y/N: ")
-            if continua == "Y":
-                pass
-            else:
-                exit()
+            print("Parabéns,você acertou!\n")
+            print(f"{n} fez {self.__pontos} pontos \n")
+            self.__cont = 0
+            return 'acertou'
 
         else:
             if self.__cont == 1:
@@ -104,15 +101,20 @@ n = input("\t\t Digite o seu nome: ").upper()
 
 jogo = Jogo(n=n)
 jogo.add_jogador()
-lista = jogo.lista()
+abertura2 = print("|----------------------------------------------|\n"
+                f"|               OLÁ {n}                       |\n"
+                 "|                                              |\n"
+                 "|          VAMOS COMEÇAR O JOGO!               |\n"
+                 "|----------------------------------------------|\n")
 
-abertura2 =print("|--------------------------------------------|\n"
-                f"|               OLÁ {n}                     |\n"
-                 "|                                            |\n"
-                 "|          VAMOS COMEÇAR O JOGO!             |\n"
-                 "|--------------------------------------------|\n")
-personagem_escolhido = random.choice(lista)
 while True:
+    lista = jogo.lista()
 
-    jogo.palpite(personagem_escolhido[0], personagem_escolhido[1:6])
+
+    personagem_escolhido = random.choice(lista)
+    while True:
+
+        palpite = jogo.palpite(personagem_escolhido[0], personagem_escolhido[1:6])
+        if palpite == 'acertou':
+            break
 
