@@ -46,7 +46,11 @@ class Jogo:
         if palpite == palavra_certa:
             print("Parabéns,você acertou!")
             print(f"{n} fez {self.__pontos} pontos ")
-            exit()
+            continua = input("Você quer continuar jogando? Y/N: ")
+            if continua == "Y":
+                pass
+            else:
+                exit()
 
         else:
             if self.__cont == 1:
@@ -112,8 +116,3 @@ while True:
 
     jogo.palpite(personagem_escolhido[0], personagem_escolhido[1:6])
 
-    continua = input("Você quer continuar jogando? Y/N: ")
-    if continua == "Y":
-        continue
-    else:
-        exit()
